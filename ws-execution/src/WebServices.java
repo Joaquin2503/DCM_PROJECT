@@ -1,5 +1,3 @@
-package parsers;
-
 import download.WebService;
 import objects.Album;
 import objects.Artist;
