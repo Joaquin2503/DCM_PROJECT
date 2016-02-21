@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ws>
+	<prefix name="w" value="http://www.w3.org/1999/02/22-rdf-syntax-ns#"/>
+	<prefix name="y" value="http://mpii.de/yago/resource/"/>
+	<!-- getAlbumByArtistId(?id,?albumId)
+	-->
+	
+	<definition>
+		<triple subject="?artist" 
+			predicate="w:label" 
+			object="?artistName"/>
+		<triple subject="?artist" 
+			predicate="w:type" 
+			object="y:wordnet_singer_110599806"/>
+		<triple subject="?artist" 
+			predicate="y:hasId" 
+			object="?artistId"/>
+		<triple subject="?artistId" 
+			predicate="w:type" 
+			object="y:musicBrainsId"/>
+		<triple subject="?artist" 
+			predicate="y:bornOnDate" 
+			object="?beginDate"/>
+		<triple subject="?beginDate" 
+			predicate="w:type" 
+			object="y:yagoDate"/>
+		<triple subject="?artist" 
+			predicate="y:diedOnDate" 
+			object="?endDate"/>
+		<triple subject="?endDate" 
+			predicate="w:type" 
+			object="y:yagoDate"/>
+	</definition>
+	
+    <!-- variables in the head: the order matters:
+         the first variables should be the input variables, followed by the output variables
+         also, for the input variables the order should match the order in the URLs of the calls
+     -->
+    <headVariables>
+        <variable type="inout" name="?artistId"/>
+        <variable type="output" name="?albumId"/>
+    </headVariables>
+
+
+	<call>
+		<part type="constant" value="http://musicbrainz.org/ws/2/release/?query=arid:"/>
+		<part type="input" variable="?artistId" separator="+" />
+	</call>
+	
+	<transformation file="mb_getAlbumByArtistId.xsl"/>
+
+</ws>
