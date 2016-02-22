@@ -9,7 +9,7 @@
 		<triple subject="?artist" 
 			predicate="w:label" 
 			object="?artistName"/>
-		<triple subject="?artist" 
+		<triple subject="?artist"
 			predicate="w:type" 
 			object="y:wordnet_singer_110599806"/>
 		<triple subject="?artist" 
@@ -43,7 +43,7 @@
 
 
 	<call>
-		<part type="constant" value="http://musicbrainz.org/ws/2/release/?query=arid:"/>
+		<part type="constant" value="http://musicbrainz.org/ws/2/release/?artist="/>
 		<part type="input" variable="?artistId" separator="+" />
 	</call>
 	
