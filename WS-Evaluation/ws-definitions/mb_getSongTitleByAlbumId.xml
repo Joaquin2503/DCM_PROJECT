@@ -44,7 +44,7 @@
 
 
 	<call>
-		<part type="constant" value="http://musicbrainz.org/ws/2/recording/?query=reid"/>
+		<part type="constant" value="http://musicbrainz.org/ws/2/recording/?query=reid:"/>
 		<part type="input" variable="?albumId" separator="+" />
 	</call>
 	
