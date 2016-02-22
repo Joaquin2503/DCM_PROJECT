@@ -4,7 +4,7 @@
     <table>
     <xsl:for-each select="*[local-name()='metadata']/*[local-name()='release-list']/*[local-name()='release']">
       <tr><td><xsl:value-of select="@id"/></td></tr>
-      <tr><td>*<xsl:value-of select="title"/>*</td></tr>
+      <tr><td>*<xsl:value-of select="*[local-name()='title']"/>*</td></tr>
     </xsl:for-each>
     </table>
   </xsl:template>
