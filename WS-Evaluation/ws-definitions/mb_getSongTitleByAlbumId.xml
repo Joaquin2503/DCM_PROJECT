@@ -37,9 +37,11 @@
          also, for the input variables the order should match the order in the URLs of the calls
      -->
     <headVariables>
+        <variable type="output" name="?songId"/>
         <variable type="inout" name="?albumId"/>
         <variable type="output" name="?songTitle"/>
         <variable type="output" name="?artistId"/>
+
     </headVariables>
 
 
