@@ -2,18 +2,65 @@ import download.WebService;
 import objects.Album;
 import objects.Artist;
 import objects.Song;
+import parsers.ParseResultsForWS;
+import parsers.WebServiceDescription;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Created by Joaquin on 20/02/2016.
  */
 public class WebServices {
 
-    public HashMap<String, Artist> artists = new HashMap<String, Artist>();
+    public static HashMap<String, Artist> artists = new HashMap<String, Artist>();
 
-    public void getArtistByNameWS(String s){
+    public static void main(String[] args){
+        //getArtistByName(?name,?artistId,?bDate,?eDate)
+        // +getAlbumByArtistId(?artistId,?albumId)
+        // +getSongTitleByAlbumId(?albumId,?songTitle,?artistId)
+        boolean EXIT = true;
+        if(args.length==0)System.out.println("Error: No input parameters.");
+        else if(args.length>1)System.out.println("Error: please dont use any spaces, if needed, separate input parameters with \'-\'");
+        else EXIT = false;
+        if(EXIT) System.exit(-1);
+        String[] ws = args[0].split("\\+");
+        if(ws.length!=3) {System.out.println("Error: problem with n° of ws"); System.exit(-1);}
+        String s;
+        // WEBSERVICE 1
+        if((s = extractBrackets(ws[0])) != null){
+            getArtistByNameWS(s);
+        }else {
+            System.out.println("Error: problem with getArtistByName"); System.exit(-1);
+        }
+
+        // WEBSERVICE 2
+        if((s = extractBrackets(ws[1])) != null){
+            getAlbumByArtistIdWS(s);
+        }else {
+            System.out.println("Error: problem with getAlbumByArtistId"); System.exit(-1);
+        }
+
+        // WEBSERVICE 3
+        if((s = extractBrackets(ws[0])) != null){
+            getSongTitleByAlbumIdWS(s);
+        }else {
+            System.out.println("Error: problem with getSongByAlbumId"); System.exit(-1);
+        }
+
+    }
+
+    private static String extractBrackets(String arg){
+        String inside = "\\[(.*?)\\]";
+        Pattern pattern = Pattern.compile(inside);
+        Matcher matcher = pattern.matcher(arg);
+        String s = matcher.group(0);
+        return s;
+    }
+
+    public static void getArtistByNameWS(String s){
         String[] args = s.split(","); //
         WebService ws = WebServiceDescription
                 .loadDescription("mb_getArtistInfoByName");
@@ -42,7 +89,7 @@ public class WebServices {
 
     }
 
-    public void getAlbumByArtistIdWS(String s){
+    public static void getAlbumByArtistIdWS(String s){
         String[] args = s.split(","); //
         WebService ws = WebServiceDescription
                 .loadDescription("mb_getAlbumByArtistId");
@@ -69,7 +116,7 @@ public class WebServices {
 
     }
 
-    public void getSongTitleByAlbumIdWS(String s){
+    public static void getSongTitleByAlbumIdWS(String s){
         String[] args = s.split(","); //
         WebService ws = WebServiceDescription
                 .loadDescription("mb_getSonTitleByAlbumId");
