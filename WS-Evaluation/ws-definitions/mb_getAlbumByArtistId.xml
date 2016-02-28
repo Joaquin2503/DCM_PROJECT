@@ -39,6 +39,7 @@
     <headVariables>
         <variable type="inout" name="?artistId"/>
         <variable type="output" name="?albumId"/>
+        <variable type="output" name="?albumTitle"/>
     </headVariables>
 
 
