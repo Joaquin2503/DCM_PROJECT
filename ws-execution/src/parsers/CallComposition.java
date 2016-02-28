@@ -12,16 +12,18 @@ public class CallComposition {
 
 	}
 
-	public void execute() {
+	public void execute() throws Exception {
 		ArrayList<ArrayList<String[]>> outputs = new ArrayList<ArrayList<String[]>>();
 		for (Atom atom : rightHand) {
 			String ws = atom.getWsCalled();
 			ArrayList<String> params = atom.getParams();
-			
+			String mainVal = params.remove(0);
+			System.out.println(mainVal);
+			outputs.add(genericCall("mb_" + ws, mainVal, params));
 		}
 	}
 
-	public static ArrayList<String[]> genericCall(String desc, String mainVal, ArrayList<String> params)
+	private static ArrayList<String[]> genericCall(String desc, String mainVal, ArrayList<String> params)
 			throws Exception {
 		WebService ws = WebServiceDescription.loadDescription(desc);
 		String fileWithCallResult = ws.getCallResult(mainVal);

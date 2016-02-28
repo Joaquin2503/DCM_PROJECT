@@ -15,8 +15,7 @@ public class MyParser {
 
 		for (String[] tuple : listOfTupleResult) { // Do the thing here
 			System.out.println(tuple[0] + "|" + tuple[2]);// tuple[0] = songId,
-															// tuple[2] =
-			// title
+															// tuple[2] = title
 		}
 
 	}
@@ -51,6 +50,19 @@ public class MyParser {
 		}
 	}
 
-	
+	public static ArrayList<String[]> genericCall(String desc, String mainVal, ArrayList<String> params)
+			throws Exception {
+		WebService ws = WebServiceDescription.loadDescription(desc);
+		String fileWithCallResult = ws.getCallResult(mainVal);
+		String fileWithTransfResults = ws.getTransformationResult(fileWithCallResult);
+		ArrayList<String[]> listOfTupleResult = ParseResultsForWS.showResults(fileWithTransfResults, ws, params);
+		for (String[] tuple : listOfTupleResult) {
+			for (String t : tuple) {
+				System.out.print(t + ", ");
+			}
+			System.out.println();
+		}
+		return listOfTupleResult;
+	}
 
 }
