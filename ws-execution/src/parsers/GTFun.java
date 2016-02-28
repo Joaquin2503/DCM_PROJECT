@@ -6,7 +6,16 @@ import download.WebService;
 
 public class GTFun {
 
+	public static void callCompositionParser() {
+		// String strTest = "getArtistInfoByNamebfff(\"Frank Sinatra\", ?id, ?b,
+		// ?e)";
+		String strTest = "getAlbumByArtistIdbff(?id, ?b,?aid, ?albumName)";
 
+		String parts[] = strTest.split("\\(");
+		String nameWS = "";
+		nameWS = parts[0].split("bf+")[0];
+		System.out.println(nameWS);
+	}
 
 	private static void callGetSongByAlbumId(StringBuilder albumId) throws Exception {
 		WebService ws = WebServiceDescription.loadDescription("mb_getSongTitleByAlbumId");
